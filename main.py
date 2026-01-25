@@ -1,16 +1,6 @@
 #!/usr/bin/env pybricks-micropython
 
-"""
-Example LEGO® MINDSTORMS® EV3 Robot Educator Color Sensor Down Program
-----------------------------------------------------------------------
-
-This program requires LEGO® EV3 MicroPython v2.0.
-Download: https://education.lego.com/en-us/support/mindstorms-ev3/python-for-ev3
-
-Building instructions can be found at:
-https://education.lego.com/en-us/support/mindstorms-ev3/building-instructions#robot
-"""
-
+from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import Motor, ColorSensor
 from pybricks.parameters import Port
 from pybricks.tools import wait
@@ -41,14 +31,15 @@ DRIVE_SPEED = 100
 # For example, if the light value deviates from the threshold by 10, the robot
 # steers at 10*1.2 = 12 degrees per second.
 PROPORTIONAL_GAIN = 1.2
+DEVIATION = float(0)
 
 # Start following the line endlessly.
 while True:
     # Calculate the deviation from the threshold.
-    deviation = line_sensor.reflection() - threshold
+    DEVIATION = line_sensor.reflection() - threshold
 
     # Calculate the turn rate.
-    turn_rate = PROPORTIONAL_GAIN * deviation
+    turn_rate = PROPORTIONAL_GAIN * DEVIATION
 
     # Set the drive base speed and turn rate.
     robot.drive(DRIVE_SPEED, turn_rate)
